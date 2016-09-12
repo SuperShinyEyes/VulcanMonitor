@@ -11,6 +11,7 @@
 		5991ECC31D85F850007814C2 /* MonitorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5991ECC21D85F850007814C2 /* MonitorController.swift */; };
 		5991ECC81D85F850007814C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5991ECC71D85F850007814C2 /* Assets.xcassets */; };
 		5991ECCB1D85F850007814C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5991ECC91D85F850007814C2 /* LaunchScreen.storyboard */; };
+		5991ECD41D864016007814C2 /* System Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5991ECD31D864016007814C2 /* System Settings.swift */; };
 		63B151AB476065BB621D6AC2 /* Pods_vulcanMonitor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 660661412ADC9FE3460A97A1 /* Pods_vulcanMonitor.framework */; };
 /* End PBXBuildFile section */
 
@@ -21,6 +22,7 @@
 		5991ECC71D85F850007814C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5991ECCA1D85F850007814C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5991ECCC1D85F850007814C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5991ECD31D864016007814C2 /* System Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "System Settings.swift"; sourceTree = "<group>"; };
 		5CCB926C31BFCEA11E6CB0E8 /* Pods-vulcanMonitor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vulcanMonitor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-vulcanMonitor/Pods-vulcanMonitor.debug.xcconfig"; sourceTree = "<group>"; };
 		660661412ADC9FE3460A97A1 /* Pods_vulcanMonitor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vulcanMonitor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF022C541AE0C39DB05FE0BA /* Pods-vulcanMonitor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vulcanMonitor.release.xcconfig"; path = "Pods/Target Support Files/Pods-vulcanMonitor/Pods-vulcanMonitor.release.xcconfig"; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 			children = (
 				5991ECC01D85F850007814C2 /* AppDelegate.swift */,
 				5991ECC21D85F850007814C2 /* MonitorController.swift */,
+				5991ECD31D864016007814C2 /* System Settings.swift */,
 				5991ECC71D85F850007814C2 /* Assets.xcassets */,
 				5991ECD21D85F873007814C2 /* Supporting Files */,
 			);
@@ -216,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5991ECC31D85F850007814C2 /* MonitorController.swift in Sources */,
+				5991ECD41D864016007814C2 /* System Settings.swift in Sources */,
 				5991ECC11D85F850007814C2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
