@@ -7,10 +7,13 @@
 //
 
 import Foundation
+import MapKit
 
 struct Constants {
     static let serverURL = "https://powerful-oasis-83494.herokuapp.com/seyoung-iphone"
     static let zoomLevel: Double = 18
+    static let libraryCoordinate = CLLocationCoordinate2D(latitude: 40.022332, longitude: -75.190843)
+    static let schollerHallCoordinate = CLLocationCoordinate2D(latitude: 40.022377, longitude:  -75.193627)
 }
 
 enum VibrationStatus: String {

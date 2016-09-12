@@ -9,6 +9,14 @@
 import UIKit
 import Mapbox
 
+class CustomPointAnnotation: MGLPointAnnotation {
+    let name: String
+    
+    init(name: String) {
+        self.name = name
+    }
+}
+
 class MonitorController: UIViewController, MGLMapViewDelegate {
     
     var requestTimer: NSTimer!
@@ -28,6 +36,7 @@ class MonitorController: UIViewController, MGLMapViewDelegate {
             detectorAnnotation.coordinate = coord
             detectorAnnotation.title = detectorAnnotationTitle
             detectorAnnotation.subtitle = detectorAnnotationSubtitle
+            print("Add Annotation")
             mapView.addAnnotation(detectorAnnotation)
             zoomIn(coord)
         }
@@ -44,6 +53,7 @@ class MonitorController: UIViewController, MGLMapViewDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         loadMapView()
+        loadDummyPointAnnotation()
         loadRequestTimer()
     }
     
@@ -53,6 +63,17 @@ class MonitorController: UIViewController, MGLMapViewDelegate {
     
     override func viewDidDisappear(animated: Bool) {
         requestTimer.invalidate()
+    }
+    
+    private func loadDummyPointAnnotation() {
+        let libraryAnnotation = CustomPointAnnotation(name: "five")
+        libraryAnnotation.coordinate = Constants.libraryCoordinate
+        
+        let schollerAnnotation = CustomPointAnnotation(name: "four")
+        schollerAnnotation.coordinate = Constants.schollerHallCoordinate
+        
+        mapView.addAnnotation(libraryAnnotation)
+        mapView.addAnnotation(schollerAnnotation)
     }
     
     private func loadRequestTimer() {
@@ -112,16 +133,21 @@ class MonitorController: UIViewController, MGLMapViewDelegate {
                     let timeStamp = convertedJsonIntoDict["timeStamp"] as? String
                     let now = NSDate().timeIntervalSince1970
                     
+                    guard let _ = magnitude else { return }
                     
-                    
+                    let newMagnitudeState = EarthquakeMagnitude(colorAsString: magnitude!)
                     
                     if let longitude = longitude,
                         latitude = latitude,
                         magnitude = magnitude,
                         old = timeStamp
-                        where now - Double(old)! < 3{
-                        self.updateMagnitudeState(magnitude)
-                        self.updateCoordinate(longitude, latitudeAsString: latitude)
+                        where newMagnitudeState != self.earthquakeMagnitude {
+                        
+                        if now - Double(old)! < 3 || newMagnitudeState == EarthquakeMagnitude.Steady {
+                            self.updateMagnitudeState(magnitude)
+                            self.updateCoordinate(longitude, latitudeAsString: latitude)
+                        }
+                        
                     }
                     
                     
@@ -176,6 +202,15 @@ class MonitorController: UIViewController, MGLMapViewDelegate {
     
     func mapView(mapView: MGLMapView, imageForAnnotation annotation: MGLAnnotation) -> MGLAnnotationImage? {
         // Try to reuse the existing ‘pisa’ annotation image, if it exists.
+        if let ca = annotation as? CustomPointAnnotation {
+            var image = UIImage(named: ca.name)!
+            image = image.imageWithAlignmentRectInsets(UIEdgeInsetsMake(0, 0, image.size.height/2, 0))
+            
+            // Initialize the ‘pisa’ annotation image with the UIImage we just loaded.
+            return MGLAnnotationImage(image: image, reuseIdentifier: ca.name)
+            
+        }
+        
         var annotationImage = mapView.dequeueReusableAnnotationImageWithIdentifier(earthquakeMagnitude.rawValue)
         
         if annotationImage == nil {
