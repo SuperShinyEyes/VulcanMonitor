@@ -1,0 +1,15 @@
+PODS:
+  - Mapbox-iOS-SDK (3.3.1)
+  - SwiftyBeaver (0.6.3)
+
+DEPENDENCIES:
+  - Mapbox-iOS-SDK (~> 3.3.1)
+  - SwiftyBeaver
+
+SPEC CHECKSUMS:
+  Mapbox-iOS-SDK: 55dea997ae34ff0553fbf4208e7d60dfefa24fd5
+  SwiftyBeaver: c182c001d532111becf2285b8878abf54c7b5621
+
+PODFILE CHECKSUM: bad953fc6cc296d8d9f4ec7025c28fecce57437e
+
+COCOAPODS: 1.0.1
