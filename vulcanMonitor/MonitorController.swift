@@ -11,6 +11,7 @@ import Mapbox
 
 class MonitorController: UIViewController, MGLMapViewDelegate {
     
+    var requestTimer: NSTimer!
     var mapView: MGLMapView!
     var detectorAnnotation = MGLPointAnnotation()
     
@@ -43,10 +44,19 @@ class MonitorController: UIViewController, MGLMapViewDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         loadMapView()
+        loadRequestTimer()
     }
     
     override func viewDidAppear(animated: Bool) {
         loadButton()
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        requestTimer.invalidate()
+    }
+    
+    private func loadRequestTimer() {
+        requestTimer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(getVulcanData), userInfo: nil, repeats: true)
     }
     
     private func loadMapView(){
@@ -67,7 +77,10 @@ class MonitorController: UIViewController, MGLMapViewDelegate {
         coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
     
+    var i = 0
     func getVulcanData(){
+        print("getVulcanData #\(i)")
+        i += 1
         guard let url = NSURL(string: Constants.serverURL) else { return }
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url) {(data, response, error) in
