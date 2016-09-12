@@ -28,23 +28,16 @@ class MonitorController: UIViewController, MGLMapViewDelegate {
     var earthquakeMagnitude = EarthquakeMagnitude.Steady
     
     var coordinate: CLLocationCoordinate2D? {
-        willSet {
-            //            mapView.removeAnnotation(detectorAnnotation)
-            //            zoomIn(detectorAnnotation.coordinate, zoomLevel: Constants.zoomLevel - 0.005)
-        }
         didSet {
             guard let coord = coordinate else { return }
+            
+            /// coordinate is updated in sharedSession. 
+            /// Fire UI update in main queue so UI is updated properly.
+            /// https://github.com/mapbox/mapbox-gl-native/issues/2693#issuecomment-150090842
             let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
             dispatch_after(delayTime, dispatch_get_main_queue()) {
                 self.updateEarthquakeAnnotation(coord)
             }
-            
-            //            detectorAnnotation.coordinate = coord
-            //            detectorAnnotation.title = detectorAnnotationTitle
-            //            detectorAnnotation.subtitle = detectorAnnotationSubtitle
-            //            print("Add Annotation")
-            //            mapView.addAnnotation(detectorAnnotation)
-            //            zoomIn(coord)
         }
     }
     
