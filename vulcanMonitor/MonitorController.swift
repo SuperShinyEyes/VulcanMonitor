@@ -67,9 +67,6 @@ class MonitorController: UIViewController, MGLMapViewDelegate {
         loadRequestTimer()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        //        loadButton()
-    }
     
     override func viewDidDisappear(animated: Bool) {
         requestTimer.invalidate()
