@@ -85,7 +85,7 @@ class MonitorController: UIViewController, MGLMapViewDelegate {
         mapView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         
         // Set the map’s center coordinate and zoom level.
-        mapView.setCenterCoordinate(CLLocationCoordinate2D(latitude: 59.31, longitude: 18.06), zoomLevel: 9, animated: false)
+        mapView.setCenterCoordinate(Constants.philaUCoordinate, zoomLevel: 14, animated: false)
         view.addSubview(mapView)
         mapView.delegate = self
     }

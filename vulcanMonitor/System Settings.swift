@@ -14,6 +14,9 @@ struct Constants {
     static let zoomLevel: Double = 18
     static let libraryCoordinate = CLLocationCoordinate2D(latitude: 40.022332, longitude: -75.190843)
     static let schollerHallCoordinate = CLLocationCoordinate2D(latitude: 40.022377, longitude:  -75.193627)
+    static let philadelphiaCoordinate = CLLocationCoordinate2D(latitude:  39.952584, longitude: -75.165222)
+    static let philaUCoordinate = CLLocationCoordinate2D(latitude:  40.023318, longitude: -75.194271)
+
 }
 
 enum VibrationStatus: String {
