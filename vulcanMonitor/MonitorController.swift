@@ -17,7 +17,7 @@ class MonitorController: UIViewController, MGLMapViewDelegate {
     
     var detectorAnnotationTitle: String = "1 person"
     var detectorAnnotationSubtitle: String = "dummy sub"
-    var earthquakeMagnitude = EarthquakeMagnitude.Strong
+    var earthquakeMagnitude = EarthquakeMagnitude.Steady
     
     var coordinate: CLLocationCoordinate2D? {
         willSet {
@@ -114,6 +114,7 @@ class MonitorController: UIViewController, MGLMapViewDelegate {
                     if let longitude = longitude,
                         latitude = latitude,
                         magnitude = magnitude {
+                        self.updateMagnitudeState(magnitude)
                         self.updateCoordinate(longitude, latitudeAsString: latitude)
                     }
                     
@@ -131,8 +132,8 @@ class MonitorController: UIViewController, MGLMapViewDelegate {
         
     }
     
-    private func updateMagnitudeState(magnitudeColor: String) {
-        earthquakeMagnitude = EarthquakeMagnitude(colorAsString: magnitudeColor)
+    private func updateMagnitudeState(magnitudeColorAsString: String) {
+        earthquakeMagnitude = EarthquakeMagnitude(colorAsString: magnitudeColorAsString)
     }
     
     private func loadButton(){
