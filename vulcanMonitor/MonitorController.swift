@@ -29,20 +29,37 @@ class MonitorController: UIViewController, MGLMapViewDelegate {
     
     var coordinate: CLLocationCoordinate2D? {
         willSet {
-            mapView.removeAnnotation(detectorAnnotation)
+            //            mapView.removeAnnotation(detectorAnnotation)
+            //            zoomIn(detectorAnnotation.coordinate, zoomLevel: Constants.zoomLevel - 0.005)
         }
         didSet {
             guard let coord = coordinate else { return }
-            detectorAnnotation.coordinate = coord
-            detectorAnnotation.title = detectorAnnotationTitle
-            detectorAnnotation.subtitle = detectorAnnotationSubtitle
-            print("Add Annotation")
-            mapView.addAnnotation(detectorAnnotation)
-            zoomIn(coord)
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                self.updateEarthquakeAnnotation(coord)
+            }
+            
+            //            detectorAnnotation.coordinate = coord
+            //            detectorAnnotation.title = detectorAnnotationTitle
+            //            detectorAnnotation.subtitle = detectorAnnotationSubtitle
+            //            print("Add Annotation")
+            //            mapView.addAnnotation(detectorAnnotation)
+            //            zoomIn(coord)
         }
     }
     
-    
+    private func updateEarthquakeAnnotation(coord: CLLocationCoordinate2D) {
+        /// Remove the old one
+        mapView.removeAnnotation(detectorAnnotation)
+        
+        /// Set the new one
+        detectorAnnotation.coordinate = coord
+        detectorAnnotation.title = detectorAnnotationTitle
+        detectorAnnotation.subtitle = detectorAnnotationSubtitle
+        
+        mapView.addAnnotation(detectorAnnotation)
+        zoomIn(coord)
+    }
     
     private func zoomIn(coord: CLLocationCoordinate2D, zoomLevel: Double = Constants.zoomLevel) {
         mapView.setCenterCoordinate(coord, zoomLevel: zoomLevel, animated: true)
