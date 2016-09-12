@@ -106,13 +106,15 @@ class MonitorController: UIViewController, MGLMapViewDelegate {
                     print("convertedJsonIntoDict: \(convertedJsonIntoDict)")
                     
                     // Get value by key
-                    let longitudeAsString = convertedJsonIntoDict["longitude"] as? String
-                    let latitudeAsString = convertedJsonIntoDict["latitude"] as? String
+                    let longitude = convertedJsonIntoDict["longitude"] as? String
+                    let latitude = convertedJsonIntoDict["latitude"] as? String
+                    let magnitude = convertedJsonIntoDict["magnitude"] as? String
                     
-                    if let longitudeAsString = longitudeAsString, latitudeAsString = latitudeAsString {
-                        //                        let longitude = Double(longitudeAsString!)
-                        //                        let latitude = Double(latitudeAsString!)
-                        self.updateCoordinate(longitudeAsString, latitudeAsString: latitudeAsString)
+                    
+                    if let longitude = longitude,
+                        latitude = latitude,
+                        magnitude = magnitude {
+                        self.updateCoordinate(longitude, latitudeAsString: latitude)
                     }
                     
                     
@@ -127,6 +129,10 @@ class MonitorController: UIViewController, MGLMapViewDelegate {
         
         task.resume()
         
+    }
+    
+    private func updateMagnitudeState(magnitudeColor: String) {
+        earthquakeMagnitude = EarthquakeMagnitude(colorAsString: magnitudeColor)
     }
     
     private func loadButton(){

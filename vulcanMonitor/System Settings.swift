@@ -22,7 +22,17 @@ enum VibrationStatus: String {
 }
 
 enum EarthquakeMagnitude: String {
-    case Strong = "red32"
+    case Strong = "red"
     case Medium = "orange"
     case Mild = "yellow"
+    case Steady = "green"
+    
+    init(colorAsString: String) {
+        switch colorAsString {
+        case "red": self = .Strong
+        case "orange": self = .Medium
+        case "yellow": self = .Mild
+        default: self = .Steady
+        }
+    }
 }
