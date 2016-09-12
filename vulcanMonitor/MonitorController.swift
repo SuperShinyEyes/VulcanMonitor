@@ -48,7 +48,7 @@ class MonitorController: UIViewController, MGLMapViewDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
-        loadButton()
+        //        loadButton()
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -109,11 +109,17 @@ class MonitorController: UIViewController, MGLMapViewDelegate {
                     let longitude = convertedJsonIntoDict["longitude"] as? String
                     let latitude = convertedJsonIntoDict["latitude"] as? String
                     let magnitude = convertedJsonIntoDict["magnitude"] as? String
+                    let timeStamp = convertedJsonIntoDict["timeStamp"] as? String
+                    let now = NSDate().timeIntervalSince1970
+                    
+                    
                     
                     
                     if let longitude = longitude,
                         latitude = latitude,
-                        magnitude = magnitude {
+                        magnitude = magnitude,
+                        old = timeStamp
+                        where now - Double(old)! < 3{
                         self.updateMagnitudeState(magnitude)
                         self.updateCoordinate(longitude, latitudeAsString: latitude)
                     }
